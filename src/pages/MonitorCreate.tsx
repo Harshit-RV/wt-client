@@ -5,22 +5,28 @@ import { Input } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function MonitorCreate() {
+  const navigate = useNavigate();
+
   const [ emailCount, setEmailCount ] = useState(1);
 
   return (
-    <div className='flex h-screen bg-white'>
-      <div className='px-4 p-4 sm:p-5 sm:px-14 flex flex-col w-full'>
+    <div className='flex h-screen bg-gray-50'>
+      <div className='px-4 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
-        <Button type={'text'} className="border-gray-200 w-14 h-14"><ArrowLeftOutlined /></Button>
+        <div className='flex justify-between items-center w-full'>
+          <Button onClick={() => navigate('/')} type='text' className="border-gray-200 w-14 min-h-10 rounded-xl shadow-sm bg-white"><ArrowLeftOutlined /></Button>
+          <h1 className='font-medium text-3xl mr-20'>Create Monitor</h1>
+          <div></div>
+        </div>
+        
 
-        <h1 className='font-extrabold text-3xl mt-5'>Create Monitor</h1>
+        <div className="w-full sm:w-[550px] mt-4">
 
-        <div className="w-full sm:w-[550px]">
-
-          <div className='flex flex-col mt-5 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-80 gap-1'>
+          <div className='flex flex-col mt-4 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-80 gap-1'>
             <span className="text-white font-semibold text-lg">URL to monitor</span>
             <Input className='my-2 p-2' />
           </div>

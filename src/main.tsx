@@ -14,7 +14,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             // Seed Token
             // colorPrimary: '#17BEBB',
             // colorPrimary: '#CD5334',
+            // colorPrimary: '#F93943',
             colorPrimary: '#F93943',
+            // colorPrimary: '#58A4B0',
+            // colorPrimary: '#0D3B66',
             borderRadius: 2,
 
             // Alias Token
