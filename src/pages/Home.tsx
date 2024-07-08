@@ -6,21 +6,22 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
+  } from "../components/ui/table"
 import { Button } from "antd"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { MoreOutlined } from '@ant-design/icons';
 
 export const Home = () => {
-    const navigate = useNavigate();
     return (
         <div className='flex justify-center h-screen bg-gray-100'>
            
-            <div className="py-12 w-[900px]">
+            <div className="py-12 w-full lg:w-[900px]">
                 
                 <div className="flex justify-between">
-                    <h1 className='font-medium text-2xl'>Create Monitor</h1>
-                    <Button onClick={() => navigate('/create')} type="primary" size="large" className="px-8 h-8">Create</Button>
+                    <h1 className='font-medium text-2xl'>Your monitors</h1>
+                    <Link to='/create'>
+                        <Button type="primary" size="large" className="px-8 h-8">Create</Button>
+                    </Link>
                 </div>
 
                 <div className="mt-7 rounded-xl border drop-shadow-sm bg-white">
@@ -57,13 +58,7 @@ export const Home = () => {
             
 
                 </div>
-
-                
             </div>
-
-            
-
-        
         </div>
     )
 }

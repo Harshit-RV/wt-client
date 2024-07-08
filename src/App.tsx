@@ -6,17 +6,14 @@ import { Button } from "antd";
 
 import {
   ButtonCN
-} from "@/components/ui/buttoncn"
+} from "./components/ui/buttoncn"
 
-
-// import { Button, Menu, MenuProps } from "antd";
-// import { AppstoreOutlined, HomeFilled } from '@ant-design/icons';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Textarea } from "@/components/ui/textarea"
+} from "./components/ui/popover"
+import { Textarea } from "./components/ui/textarea"
 
 
 import { ScrollArea } from "./components/ui/scroll-area";
@@ -86,13 +83,15 @@ function App() {
 
           <div className="flex h-full">
             <NavBarItem pathname={location.pathname} link="/" title="Home" />
-            <NavBarItem pathname={location.pathname} link="/create" title="Create Monitort" />
+            <NavBarItem pathname={location.pathname} link="/create" title="Create Monitor" />
           </div>
           
 
           <div className="h-full flex items-center gap-5">
             <FeedbackComponent />
-            <ButtonCN variant="default" className={`font-semibold border-gray-300 h-8`}>Account</ButtonCN>
+            <Link to='http://localhost:3000/auth?show=signin'>
+              <ButtonCN variant="default" className={`font-semibold border-gray-300 h-8`}>Account</ButtonCN>
+            </Link>
           </div>
           
       </div>
