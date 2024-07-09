@@ -14,7 +14,7 @@ function MonitorCreate() {
   const [ emailCount, setEmailCount ] = useState(1);
 
   return (
-    <div className='flex h-screen bg-gray-100'>
+    <div className='flex min-h-screen bg-gray-100'>
       <div className='px-4 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
         <div className='flex justify-between items-center w-full'>

@@ -13,7 +13,7 @@ import { MoreOutlined } from '@ant-design/icons';
 
 export const Home = () => {
     return (
-        <div className='flex justify-center h-screen bg-gray-100'>
+        <div className='flex justify-center min-h-screen bg-gray-100'>
            
             <div className="py-12 w-full lg:w-[900px]">
                 

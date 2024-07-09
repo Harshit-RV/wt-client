@@ -3,12 +3,34 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { ConfigProvider } from 'antd'
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, useNavigate } from "react-router-dom"
+import { ClerkProvider } from '@clerk/clerk-react'
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+
+const ClerkWithRoutes = () => {
+  const navigate = useNavigate();
+
+  return (
+    <ClerkProvider 
+      routerPush={(to) => navigate(to)}
+      routerReplace={(to) => navigate(to, { replace: true })}
+      publishableKey={PUBLISHABLE_KEY}
+    >
+      <App />
+    </ClerkProvider>
+  )
+}
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <ConfigProvider
+    <BrowserRouter>
+    <ConfigProvider
         theme={{
           token: {
             // Seed Token
@@ -25,16 +47,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           components: {
             Menu: {
               itemBg: '#fafafa',
-              // darkItemHoverColor: '#000',
-              // darkItemSelectedBg: '#fa8c91',
-              // darkItemSelectedColor: '#fff',
             },
           },
         }}
       >
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-    </ConfigProvider>
+        <ClerkWithRoutes />
+      </ConfigProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 )
