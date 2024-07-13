@@ -29,7 +29,7 @@ function MonitorCreate() {
       return;
     }
 
-    toast.promise(
+    await toast.promise(
       createMonitor({ monitorUrl, alertCondition, email, token }),
        {
          loading: 'Saving...',
@@ -37,6 +37,8 @@ function MonitorCreate() {
          error: <b>Could not create monitor.</b>,
        }
      );
+
+     navigate('/');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
