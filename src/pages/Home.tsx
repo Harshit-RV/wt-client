@@ -10,8 +10,28 @@ import {
 import { Button } from "antd"
 import { Link } from "react-router-dom"
 import { MoreOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import { useAuth } from "@clerk/clerk-react";
 
 export const Home = () => {
+    const { getToken } = useAuth();
+
+    const makeRequest = async () => {
+        try {
+            await axios.post('http://localhost:8080/monitor/create', {
+                monitorUrl: 'https://harshitrv.vercel.app/',
+                alertCondition: 'IS404',
+                email: 'harshit.rai.verma@gmail.com'
+            }, {
+                headers: {
+                    Authorization: `Bearer ${await getToken()}`
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className='flex justify-center min-h-screen bg-gray-100'>
            
@@ -22,6 +42,7 @@ export const Home = () => {
                     <Link to='/create'>
                         <Button type="primary" size="large" className="px-8 h-8">Create</Button>
                     </Link>
+                    <Button onClick={makeRequest} type="primary" size="large" className="px-8 h-8">Create 2</Button>
                 </div>
 
                 <div className="mt-7 rounded-xl border drop-shadow-sm bg-white">

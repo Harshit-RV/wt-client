@@ -6,15 +6,46 @@ import { ArrowLeftOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icon
 import { Select } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from '@clerk/clerk-react';
+import { AlertCondition, MonitorProps } from '../types/monitor';
+import { createMonitor } from './utils/monitor.utils';
+import toast, { Toaster } from 'react-hot-toast';
+import { withSuccess } from 'antd/es/modal/confirm';
 
 
 function MonitorCreate() {
   const navigate = useNavigate();
+  const { getToken } = useAuth();
+
+  const [ monitorUrl, setMonitorUrl ] = useState('');
+  const [ alertCondition, setAlertCondition ] = useState<AlertCondition>();
+  const [ email, setEmail ] = useState('');
+
+  const onClick = async () => {
+    const token: string | null = await getToken();
+
+
+    if (!monitorUrl || monitorUrl == '' || !alertCondition || !email || email == '' || !token) {
+      toast.error('Invalid input');
+      return;
+    }
+
+    toast.promise(
+      createMonitor({ monitorUrl, alertCondition, email, token }),
+       {
+         loading: 'Saving...',
+         success: <b>Monitor Created</b>,
+         error: <b>Could not create monitor.</b>,
+       }
+     );
+  }
 
   const [ emailCount, setEmailCount ] = useState(1);
 
   return (
     <div className='flex min-h-screen bg-gray-100'>
+      <div><Toaster/></div>
       <div className='px-4 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
         <div className='flex justify-between items-center w-full'>
@@ -27,40 +58,42 @@ function MonitorCreate() {
         <div className="w-full sm:w-[550px] mt-4">
 
           <div className='flex flex-col mt-4 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-80 gap-1'>
-            <span className="text-white font-semibold text-lg">URL to monitor</span>
-            <Input className='my-2 p-2' />
+            <span className="text-white font-semibold text-lg">URL to monitor {monitorUrl} </span>
+            <Input className='my-2 p-2' onChange={(e) => setMonitorUrl(e.target.value)} />
           </div>
 
 
           <div className='flex flex-col mt-5 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-5 gap-3'>
-            <span className=" font-semibold text-lg">Alert Condition</span>
+            <span className=" font-semibold text-lg">Alert Condition {alertCondition}</span>
             
             <Select
               style={{ flex: 1 }}
               size='large'
+              onChange={(value: AlertCondition) => setAlertCondition(value)}
               options={[
-                { value: 'When URL is unavailable', label: 'When URL is unavailable' },
-                { value: 'When status code is 404', label: 'When status code is 404' },
-                { value: 'When status code is 501', label: 'When status code is 501' },
-                { value: 'When status code is not', label: 'When status code is not 200' },
+                { value: 'ISUNAVAILABLE', label: 'When URL is unavailable' },
+                { value: 'IS404', label: 'When status code is 404' },
+                { value: 'IS500', label: 'When status code is 500' },
+                { value: 'IS501', label: 'When status code is 501' },
+                { value: 'ISNOT200', label: 'When status code is not 200' },
               ]}
             />
 
           </div>
           
           <div className='flex flex-col mt-5 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-5 gap-3'>
-            <span className=" font-semibold text-lg">Contact Options</span>
+            <span className=" font-semibold text-lg">Contact Options {email}</span>
 
             {
               Array(emailCount).fill(0).map((_, i) => (
-                <Input key={i} className='p-2' placeholder={`Priority ${i+1}: E-mail`}/>
+                <Input onChange={(e) => setEmail(e.target.value)} key={i} className='p-2' placeholder={`Priority ${i+1}: E-mail`}/>
               ))
             }
 
-            <div className='flex gap-3 mb-3'>
+            {/* <div className='flex gap-3 mb-3'>
               <Button disabled={emailCount == 5} onClick={() => setEmailCount((value) => value+1)} type='primary' className='w-20 '><PlusOutlined /></Button>
               <Button disabled={emailCount == 1} onClick={() => setEmailCount((value) => value-1)} type='default' className='w-20 '><MinusOutlined /></Button>
-            </div>
+            </div> */}
 
 
             { emailCount != 1 && <div className='flex justify-between gap-2 mt-1 items-center'>
@@ -83,15 +116,13 @@ function MonitorCreate() {
               
             <div className='flex justify-between gap-2 items-center'>
               
-              <span className='text-[15px]'>Time before sending next series of alerts</span>
+              <span className='text-[15px]'>Time before consecutive checks</span>
               <Select 
                 style={{ width: 100 }}
-                placeholder='x mins'
                 size='small'
+                defaultValue={'3'}
                 options={[
-                  { value: '10', label: '10 mins' },
-                  { value: '5', label: '5 mins' },
-                  { value: '2', label: '2 mins' },
+                  { value: '3', label: '3 mins' },
                 ]}
               />
              
@@ -102,7 +133,7 @@ function MonitorCreate() {
 
           <div className='flex justify-end my-7 gap-8'>
             <Button size='large' className='px-10'>Cancel</Button>
-            <Button type='primary' size='large' className='px-10'>Create</Button>
+            <Button onClick={onClick} type='primary' size='large' className='px-10'>Create</Button>
           </div>
         </div>
 
