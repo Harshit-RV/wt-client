@@ -9,6 +9,7 @@ import { SignInPage } from "./pages/SignIn";
 import { SignUpPage } from "./pages/SignUp";
 import { ReactNode } from "react";
 import { NavBar } from "./components/NavBar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const location = useLocation();
@@ -16,6 +17,7 @@ function App() {
   
   return (
     <div className="flex flex-col">
+      <div><Toaster/></div>
       {
         location.pathname == '/sign-in' || location.pathname == '/sign-up' ? null :  <NavBar />
       }

@@ -30,4 +30,4 @@ export interface ContactDoc extends Document {
   updatedAt: Date,
 }
 
-export type AlertCondition = 'IS500' | 'ISUNAVAILABLE' | 'IS404' | 'IS500' | 'ISNOT200';
+export type AlertCondition = 'IS501' | 'ISUNAVAILABLE' | 'IS404' | 'IS500' | 'ISNOT200';

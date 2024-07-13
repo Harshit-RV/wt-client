@@ -2,16 +2,14 @@
 // import { Button } from "./components/ui/button";
 import { Button } from 'antd';
 import { Input } from "antd";
-import { ArrowLeftOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
-import { AlertCondition, MonitorProps } from '../types/monitor';
-import { createMonitor } from './utils/monitor.utils';
-import toast, { Toaster } from 'react-hot-toast';
-import { withSuccess } from 'antd/es/modal/confirm';
+import { AlertCondition } from '../types/monitor';
+import { createMonitor } from '../utils/monitor.utils';
+import toast from 'react-hot-toast';
 
 
 function MonitorCreate() {
@@ -41,11 +39,11 @@ function MonitorCreate() {
      );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ emailCount, setEmailCount ] = useState(1);
 
   return (
     <div className='flex min-h-screen bg-gray-100'>
-      <div><Toaster/></div>
       <div className='px-4 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
         <div className='flex justify-between items-center w-full'>
@@ -57,18 +55,19 @@ function MonitorCreate() {
 
         <div className="w-full sm:w-[550px] mt-4">
 
-          <div className='flex flex-col mt-4 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-80 gap-1'>
-            <span className="text-white font-semibold text-lg">URL to monitor {monitorUrl} </span>
+          <div className='flex flex-col mt-4 border py-7 rounded-lg px-10 shadow-sm bg-black bg-opacity-80 gap-1'>
+            <span className="text-white font-semibold text-lg">URL to monitor</span>
             <Input className='my-2 p-2' onChange={(e) => setMonitorUrl(e.target.value)} />
           </div>
 
 
-          <div className='flex flex-col mt-5 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-5 gap-3'>
-            <span className=" font-semibold text-lg">Alert Condition {alertCondition}</span>
+          <div className='flex flex-col mt-5 border py-7 rounded-lg px-10 shadow-sm bg-black bg-opacity-5 gap-3'>
+            <span className=" font-semibold text-lg">Alert Condition</span>
             
             <Select
               style={{ flex: 1 }}
               size='large'
+              placeholder='Select'
               onChange={(value: AlertCondition) => setAlertCondition(value)}
               options={[
                 { value: 'ISUNAVAILABLE', label: 'When URL is unavailable' },
@@ -81,8 +80,8 @@ function MonitorCreate() {
 
           </div>
           
-          <div className='flex flex-col mt-5 border p-7 rounded-lg pr-14 shadow-sm bg-black bg-opacity-5 gap-3'>
-            <span className=" font-semibold text-lg">Contact Options {email}</span>
+          <div className='flex flex-col mt-5 border py-7 px-10 rounded-lg shadow-sm bg-black bg-opacity-5 gap-3'>
+            <span className=" font-semibold text-lg">Contact Options</span>
 
             {
               Array(emailCount).fill(0).map((_, i) => (
