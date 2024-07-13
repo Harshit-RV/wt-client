@@ -86,7 +86,7 @@ export const Home = () => {
                 <Table className='rounded-lg'>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="w-[60px] mr-4"></TableHead>
+                            <TableHead className="w-[25px]"></TableHead>
                             <TableHead>Monitors</TableHead>
                             <TableHead className="text-right">Options</TableHead>
                         </TableRow>
@@ -98,7 +98,17 @@ export const Home = () => {
                             ?
                                 monitors?.map((monitor) => (
                                     <TableRow>
-                                        <TableCell><div className="w-4 ml-3 h-4 bg-green-500"></div></TableCell>
+                                        <TableCell>
+                                            {
+                                                monitor.status 
+                                                ? <div className="w-4 ml-3 h-4 bg-green-500 rounded-full"></div>
+                                                : <div className="relative ml-3 w-6 h-6">
+                                                    <div className="w-4 h-4 rounded-full bg-red-500 absolute z-0 animate-ping"></div>
+                                                    <div className="w-4 h-4 rounded-full bg-red-500 absolute z-10"></div>
+                                                </div> 
+                                            }
+                                            
+                                        </TableCell>
                                         <TableCell className="flex flex-col">
                                             <span className="font-medium text-lg mb-0.5 text-gray-800">{monitor.monitorUrl}</span>
                                             <span className="text-gray-400 font-semibold text-sm">
@@ -107,7 +117,6 @@ export const Home = () => {
                                             </span>
                                         </TableCell>
                                         <TableCell className="text-right text-lg">
-                                            {/* <MoreOutlined/> */}
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger><MoreOutlined/></DropdownMenuTrigger>
                                                 <DropdownMenuContent>

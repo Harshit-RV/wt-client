@@ -14,6 +14,7 @@ export interface MonitorDoc extends Document {
   lastChecked: Date,
   createdAt: Date,
   updatedAt: Date,
+  status: boolean,
   alertCondition: AlertCondition,
   contacts: ContactDoc[],
 }
