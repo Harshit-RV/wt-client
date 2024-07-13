@@ -22,6 +22,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "../components/ui/dropdown-menu"
+  import { Skeleton } from "../components/ui/skeleton"
 import toast from "react-hot-toast";
 
 export const Home = () => {
@@ -66,7 +67,7 @@ export const Home = () => {
         refetchMonitors();
     }
 
-    const { data: monitors, refetch: refetchMonitors } = useQuery('events', fetchList);
+    const { data: monitors, isLoading: monitorLoading, refetch: refetchMonitors } = useQuery('events', fetchList);
 
     return (
         <div className='flex justify-center min-h-screen bg-gray-100'>
@@ -91,31 +92,41 @@ export const Home = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
+                        
                         {
-                            monitors?.map((monitor) => (
-                                <TableRow>
-                                    <TableCell><div className="w-4 ml-3 h-4 bg-green-500"></div></TableCell>
-                                    <TableCell className="flex flex-col">
-                                        <span className="font-medium text-lg mb-0.5 text-gray-800">{monitor.monitorUrl}</span>
-                                        <span className="text-gray-400 font-semibold text-sm">
-                                            {convertAlertConditionToString(monitor.alertCondition)} 
-                                            {' ∘'} <span className="font-medium">{monitor.contacts[0].email}</span>
-                                        </span>
-                                    </TableCell>
-                                    <TableCell className="text-right text-lg">
-                                        {/* <MoreOutlined/> */}
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger><MoreOutlined/></DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                <DropdownMenuLabel>Options</DropdownMenuLabel>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem onClick={() => onDelete(String(monitor._id))}>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            ))
+                            !monitorLoading || monitors != undefined
+                            ?
+                                monitors?.map((monitor) => (
+                                    <TableRow>
+                                        <TableCell><div className="w-4 ml-3 h-4 bg-green-500"></div></TableCell>
+                                        <TableCell className="flex flex-col">
+                                            <span className="font-medium text-lg mb-0.5 text-gray-800">{monitor.monitorUrl}</span>
+                                            <span className="text-gray-400 font-semibold text-sm">
+                                                {convertAlertConditionToString(monitor.alertCondition)} 
+                                                {' ∘'} <span className="font-medium">{monitor.contacts[0].email}</span>
+                                            </span>
+                                        </TableCell>
+                                        <TableCell className="text-right text-lg">
+                                            {/* <MoreOutlined/> */}
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger><MoreOutlined/></DropdownMenuTrigger>
+                                                <DropdownMenuContent>
+                                                    <DropdownMenuLabel>Options</DropdownMenuLabel>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuItem onClick={() => onDelete(String(monitor._id))}>Delete</DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                )) 
+                            : 
+                            <>
+                                <MonitorSkeleton/>
+                                <MonitorSkeleton/>
+                                <MonitorSkeleton/>
+                            </>
                         }
+                         
                     </TableBody>
                 </Table>
 
@@ -125,4 +136,30 @@ export const Home = () => {
             </div>
         </div>
     )
+}
+
+export const MonitorSkeleton = () => {
+    return (
+        <TableRow>
+            <TableCell>
+                <Skeleton className="w-5 ml-3 h-5 bg-gray-200" />
+
+                {/* <div className="w-4 ml-3 h-4 bg-green-500"></div> */}
+            </TableCell>
+
+            <TableCell className="flex flex-col w-full">
+
+                <Skeleton className="w-full h-5 mb-3 bg-gray-200" />
+                <div className="flex w-full">
+                    <Skeleton className="w-full h-5 bg-gray-200" />
+                    <div className="w-full"></div>
+                </div>
+
+            </TableCell>
+
+            <TableCell className="text-right text-lg">
+                <MoreOutlined/>
+            </TableCell>
+        </TableRow>
+    );
 }
