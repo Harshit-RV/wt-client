@@ -40,7 +40,8 @@ function MonitorCreate() {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ emailCount, setEmailCount ] = useState(1);
+  // const [ emailCount, setEmailCount ] = useState(1);
+  const emailCount = 1;
 
   return (
     <div className='flex min-h-screen bg-gray-100'>

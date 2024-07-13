@@ -10,7 +10,6 @@ import {
 import { Button } from "antd"
 import { Link } from "react-router-dom"
 import { MoreOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { useAuth } from "@clerk/clerk-react";
 import { useQuery } from 'react-query'
 import { deleteMonitor, getList } from "../utils/monitor.utils";
@@ -27,19 +26,6 @@ import toast from "react-hot-toast";
 
 export const Home = () => {
     const { getToken } = useAuth();
-
-    const makeRequest = async () => {
-        try {
-            const res = await axios.get('http://localhost:8080/monitor/list', {
-                headers: {
-                    Authorization: `Bearer ${await getToken()}`
-                }
-            })
-            console.log(res);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const fetchList = async () => {
         const token = await getToken();
@@ -80,7 +66,7 @@ export const Home = () => {
         refetchMonitors();
     }
 
-    const { data: monitors, isLoading: monitorsLoading, refetch: refetchMonitors } = useQuery('events', fetchList);
+    const { data: monitors, refetch: refetchMonitors } = useQuery('events', fetchList);
 
     return (
         <div className='flex justify-center min-h-screen bg-gray-100'>
