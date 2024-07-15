@@ -74,13 +74,13 @@ export const Home = () => {
            
             <div className="py-12 w-full lg:w-[900px]">
                 
-                <div className="flex justify-between">
-                    <h1 className='font-medium text-2xl'>Your monitors</h1>
+                <div className="flex justify-between h-8">
+                    <h1 className='font-black text-2xl font-poppins mt-1.5'>Your monitors</h1>
                     <Link to='/create'>
-                        <Button type="primary" size="large" className="px-8 h-8">Create</Button>
+                        <Button type="primary" size="large" className="px-8 h-full">Create</Button>
                     </Link>
-                    {/* <Button onClick={makeRequest} type="primary" size="large" className="px-8 h-8">Create 2</Button> */}
                 </div>
+                
 
                 <div className="mt-7 rounded-xl border drop-shadow-sm bg-white">
                 <Table className='rounded-lg'>

@@ -51,7 +51,7 @@ function MonitorCreate() {
 
         <div className='flex justify-between items-center w-full'>
           <Button onClick={() => navigate('/')} type='text' className="border-gray-200 w-14 min-h-10 rounded-xl shadow-sm bg-white"><ArrowLeftOutlined /></Button>
-          <h1 className='font-medium text-3xl mr-20'>Create Monitor</h1>
+          <h1 className='font-black text-3xl mr-20 font-poppins mt-1.5'>Create Monitor</h1>
           <div></div>
         </div>
         
