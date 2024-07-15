@@ -43,3 +43,18 @@ export const getList = async (token: string): Promise<MonitorDoc[]> => {
     })
     return res.data;
 }
+
+export const postFeedback = async (rating: number, feedback: string, token: string) => {
+    try {
+        await axios.post('https://wt-server.onrender.com/feedback', {
+            feedback: feedback,
+            rating: rating
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  }
