@@ -1,9 +1,0 @@
-name = "my-worker"
-type = "javascript"
-
-account_id = "your-account-id"
-workers_dev = true
-compatibility_date = "2022-07-13"
-
-[build]
-command = "yarn build"
