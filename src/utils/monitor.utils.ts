@@ -1,9 +1,5 @@
 import axios from "axios";
-import { MonitorDoc, MonitorProps } from "../types/monitor";
-
-interface CreateMonitorProps extends MonitorProps {
-  token: string;
-}
+import { CreateMonitorProps, MonitorDoc } from "../types/monitor";
 
 export const createMonitor = async (args: CreateMonitorProps) => {
   try {

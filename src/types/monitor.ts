@@ -24,6 +24,10 @@ export interface ContactProps {
   email: string,
 }
 
+export interface CreateMonitorProps extends MonitorProps {
+  token: string;
+}
+
 export interface ContactDoc extends Document {
   priorityOrder: number,
   email: string,

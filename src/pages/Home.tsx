@@ -22,8 +22,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "../components/ui/dropdown-menu"
-  import { Skeleton } from "../components/ui/skeleton"
 import toast from "react-hot-toast";
+import { MonitorSkeleton } from "../components/MonitorSkeleton";
+import { TimerComponent } from "../components/TimerComponent";
 
 export const Home = () => {
     const { getToken } = useAuth();
@@ -73,12 +74,17 @@ export const Home = () => {
         <div className='flex justify-center min-h-screen bg-gray-100'>
            
             <div className="py-12 w-full lg:w-[900px]">
+
+                
                 
                 <div className="flex justify-between h-8">
                     <h1 className='font-black text-2xl font-poppins mt-1.5'>Your monitors</h1>
-                    <Link to='/create'>
-                        <Button type="primary" size="large" className="px-8 h-full">Create</Button>
-                    </Link>
+                    <div className="flex gap-5">
+                        <TimerComponent refetchMonitors={refetchMonitors}/>
+                        <Link to='/create'>
+                            <Button type="primary" size="large" className="px-8 h-full">Create</Button>
+                        </Link>
+                    </div>
                 </div>
                 
 
@@ -145,30 +151,4 @@ export const Home = () => {
             </div>
         </div>
     )
-}
-
-export const MonitorSkeleton = () => {
-    return (
-        <TableRow>
-            <TableCell>
-                <Skeleton className="w-5 ml-3 h-5 bg-gray-200" />
-
-                {/* <div className="w-4 ml-3 h-4 bg-green-500"></div> */}
-            </TableCell>
-
-            <TableCell className="flex flex-col w-full">
-
-                <Skeleton className="w-full h-5 mb-3 bg-gray-200" />
-                <div className="flex w-full">
-                    <Skeleton className="w-full h-5 bg-gray-200" />
-                    <div className="w-full"></div>
-                </div>
-
-            </TableCell>
-
-            <TableCell className="text-right text-lg">
-                <MoreOutlined/>
-            </TableCell>
-        </TableRow>
-    );
 }
