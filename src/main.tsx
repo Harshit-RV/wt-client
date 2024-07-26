@@ -36,17 +36,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ConfigProvider
           theme={{
             token: {
-              // Seed Token
-              // colorPrimary: '#17BEBB',
-              // colorPrimary: '#F93943', //primary
               colorPrimary: '#764abc', //primary
-              // colorPrimary: '#0499b0',
-              // colorPrimary: '#A40E4C',
-              // colorPrimary: '#0D3B66',
               borderRadius: 2,
-
-              // Alias Token
-              // colorBgContainer: '#f6ffed',
             },
             components: {
               Menu: {
