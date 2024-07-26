@@ -12,7 +12,6 @@ export const TimerComponent = ( { refetchMonitors } : { refetchMonitors: () => v
   const fetchTimer = async () => {
     const token = await getToken();
     if (!token) return null;
-    console.log('fetching timer data');
     return await getTimer(token);
   };
   
@@ -44,7 +43,6 @@ export const TimerComponent = ( { refetchMonitors } : { refetchMonitors: () => v
 
   useEffect(() => {
     if (remainingTime == 0) {
-        console.log('time has passed bro');
         refetch();
         refetchMonitors();
         setRemainingTime(180);
