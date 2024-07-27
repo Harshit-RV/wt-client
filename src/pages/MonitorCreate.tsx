@@ -47,24 +47,24 @@ function MonitorCreate() {
 
   return (
     <div className='flex min-h-screen bg-gray-100'>
-      <div className='px-4 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
+      <div className='px-3 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
-        <div className='flex justify-between items-center w-full'>
-          <Button onClick={() => navigate('/')} type='text' className="border-gray-200 w-14 min-h-10 rounded-xl shadow-sm bg-white"><ArrowLeftOutlined /></Button>
-          <h1 className='font-black text-[28px] h-[36px] mr-20 font-poppins mt-1.5'>Create Monitor</h1>
-          <div></div>
+        <div className='flex flex-col sm:flex-row gap-4 sm:justify-between w-full'>
+          <Button onClick={() => navigate('/')} type='text' className="border-gray-200 w-14 min-h-6 rounded-md shadow-sm bg-white"><ArrowLeftOutlined /></Button>
+          <h1 className='font-black text-[28px] h-[36px] sm:mr-20 font-poppins sm:mt-1.5'>Create Monitor</h1>
+          <div className='sm:flex hidden'></div>
         </div>
         
 
-        <div className="w-full sm:w-[550px] mt-4">
+        <div className="w-full sm:w-[550px] mt-2 sm:mt-4">
 
-          <div className='flex flex-col mt-4 border py-7 rounded-lg px-10 shadow-sm bg-black bg-opacity-80 gap-1'>
+          <div className='flex flex-col mt-4 border py-7 rounded-lg px-6 sm:px-10 shadow-sm bg-black bg-opacity-80 gap-1'>
             <span className="text-white font-semibold text-lg">URL to monitor</span>
             <Input className='my-2 p-2' onChange={(e) => setMonitorUrl(e.target.value)} />
           </div>
 
 
-          <div className='flex flex-col mt-5 border py-7 rounded-lg px-10 shadow-sm bg-black bg-opacity-5 gap-3'>
+          <div className='flex flex-col mt-5 border py-7 rounded-lg px-6 sm:px-10 shadow-sm bg-black bg-opacity-5 gap-3'>
             <span className=" font-semibold text-lg">Alert Condition</span>
             
             <Select
@@ -83,7 +83,7 @@ function MonitorCreate() {
 
           </div>
           
-          <div className='flex flex-col mt-5 border py-7 px-10 rounded-lg shadow-sm bg-black bg-opacity-5 gap-3'>
+          <div className='flex flex-col mt-5 border py-7 px-6 sm:px-10 rounded-lg shadow-sm bg-black bg-opacity-5 gap-3'>
             <span className=" font-semibold text-lg">Contact Options</span>
 
             {
