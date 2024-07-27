@@ -6,7 +6,7 @@ export const SignInPage = () => {
              <SignIn 
                 appearance={{
                     elements: {
-                      formButtonPrimary: "bg-[#F93943] hover:bg-[#F93943]/80",
+                      formButtonPrimary: "bg-[#764abc] hover:bg-[#764abc]/80",
                     },
                   }}
              />
