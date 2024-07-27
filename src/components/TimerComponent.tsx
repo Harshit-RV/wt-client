@@ -4,7 +4,7 @@ import { getTimer } from "../utils/timer.utils";
 import { useQuery } from "react-query";
 import { Skeleton } from "./ui/skeleton";
 
-export const TimerComponent = ( { refetchMonitors } : { refetchMonitors: () => void }) => {
+export const TimerComponent = ( { refetchMonitors, className } : { refetchMonitors: () => void, className: string }) => {
   const { getToken } = useAuth();
   const [timer, setTimer] = useState<Date | null>(null);
   const [remainingTime, setRemainingTime] = useState<number>(180);
@@ -52,8 +52,8 @@ export const TimerComponent = ( { refetchMonitors } : { refetchMonitors: () => v
 
 
 
-  if (isLoading) return <Skeleton className="w-40 h-6 mt-2 bg-gray-300" />;
-  if (error) return <Skeleton className="w-40 h-6 mt-2 bg-gray-300" />;
+  if (isLoading) return <Skeleton className={`w-40 max-h-6 sm:h-6 mt-2 bg-gray-300 ${className}`} />;
+  if (error) return <Skeleton className={`w-40 max-h-6 sm:h-6 mt-2 bg-gray-300 ${className}`} />;
 
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -62,7 +62,7 @@ export const TimerComponent = ( { refetchMonitors } : { refetchMonitors: () => v
   };
 
   return (
-    <div className="h-full items-end flex font-semibold text-lg text-gray-400">
+    <div className={`font-semibold text-lg text-gray-400 ${className}`}>
       <div> <span className="text-gray-400 text-sm">Next ping in</span> {formatTime(remainingTime)} mins</div>
     </div>
   );

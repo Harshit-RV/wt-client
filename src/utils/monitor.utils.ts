@@ -54,3 +54,9 @@ export const postFeedback = async (rating: number, feedback: string, token: stri
         console.log(error);
     }
   }
+
+export const extractDomainForDisplay = (url: string): string => {
+    const protocolRegex = /^https?:\/\//;
+
+    return url.replace(protocolRegex, '');
+}

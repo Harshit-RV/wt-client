@@ -10,6 +10,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { AlertCondition } from '../types/monitor';
 import { createMonitor } from '../utils/monitor.utils';
 import toast from 'react-hot-toast';
+import { ButtonCN } from '../components/ui/buttoncn';
 
 
 function MonitorCreate() {
@@ -50,7 +51,7 @@ function MonitorCreate() {
       <div className='px-3 p-4 sm:p-5 sm:px-14 mt-3 flex flex-col w-full items-center'>
 
         <div className='flex flex-col sm:flex-row gap-4 sm:justify-between w-full'>
-          <Button onClick={() => navigate('/')} type='text' className="border-gray-200 w-14 min-h-6 rounded-md shadow-sm bg-white"><ArrowLeftOutlined /></Button>
+          <ButtonCN onClick={() => navigate('/')} variant={'link'}  className="w-14 bg-white hover:bg-white/50 max-h-8 rounded-md shadow-sm"><ArrowLeftOutlined /></ButtonCN>
           <h1 className='font-black text-[28px] h-[36px] sm:mr-20 font-poppins sm:mt-1.5'>Create Monitor</h1>
           <div className='sm:flex hidden'></div>
         </div>

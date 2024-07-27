@@ -3,7 +3,7 @@ import { Routes,Route, useLocation } from "react-router-dom"
 import MonitorCreate from "./pages/MonitorCreate";
 import { Home } from "./pages/Home";
 
-import { ScrollArea } from "./components/ui/scroll-area";
+// import { ScrollArea } from "./components/ui/scroll-area";
 import { RedirectToSignIn, SignedIn, SignedOut} from "@clerk/clerk-react";
 import { SignInPage } from "./pages/SignIn";
 import { SignUpPage } from "./pages/SignUp";
@@ -22,7 +22,7 @@ function App() {
         location.pathname == '/sign-in' || location.pathname == '/sign-up' ? null :  <NavBar />
       }
 
-      <ScrollArea className="h-full w-full rounded-md border">
+      {/* <ScrollArea className="h-full w-full px-10 rounded-md border"> */}
         <Routes>
           <Route path="/" element= { <ProtectedRoute child={<Home/>} /> }/>
           <Route path="/create" element={ <ProtectedRoute child={<MonitorCreate/>} />} />
@@ -30,7 +30,7 @@ function App() {
           <Route path="/sign-up" element={<SignUpPage/>} />
 
         </Routes>
-      </ScrollArea>
+      {/* </ScrollArea> */}
       
     </div>
   );
